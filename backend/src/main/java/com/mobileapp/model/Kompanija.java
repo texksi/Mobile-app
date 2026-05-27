@@ -23,7 +23,9 @@ public class Kompanija {
     @Column(name = "naziv", nullable = false)
     @NotBlank
     private String naziv;
-
+    @Column(name = "kontakt", nullable = false)
+    @NotBlank
+    private String kontakt;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "kompanija")
     @Builder.Default
     private List<Putovanje> putovanja = new ArrayList<>();

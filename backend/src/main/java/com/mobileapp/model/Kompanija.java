@@ -20,7 +20,7 @@ public class Kompanija {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "naziv", nullable = false)
+    @Column(name = "naziv", nullable = false, unique = true)
     @NotBlank
     private String naziv;
     @Column(name = "kontakt", nullable = false)

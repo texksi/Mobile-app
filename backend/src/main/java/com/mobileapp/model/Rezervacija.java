@@ -1,9 +1,10 @@
 package com.mobileapp.model;
 
+import com.mobileapp.model.enums.NacinPlacanja;
+import com.mobileapp.model.enums.StatusRezervacije;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
@@ -29,12 +30,14 @@ public class Rezervacija {
     @Column(name = "ukupan_iznos", nullable = false)
     @Positive
     private double ukupanIznos;
+    @Enumerated(EnumType.STRING)
     @Column(name = "nacin_placanja", nullable = false)
-    @NotBlank
-    private String nacinPlacanja;
+    @NotNull
+    private NacinPlacanja nacinPlacanja;
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    @NotBlank
-    private String status;
+    @NotNull
+    private StatusRezervacije status;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "korisnik_id")
     private Korisnik korisnik;

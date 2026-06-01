@@ -1,4 +1,4 @@
-package com.mobileapp.model;
+package com.mobileapp.model.enums;
 
 public enum Role {
 

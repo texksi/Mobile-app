@@ -1,6 +1,6 @@
 package com.mobileapp.dto.response;
 
-import com.mobileapp.model.Role;
+import com.mobileapp.model.enums.Role;
 import lombok.*;
 
 @Getter

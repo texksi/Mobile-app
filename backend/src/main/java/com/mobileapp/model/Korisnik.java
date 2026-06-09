@@ -1,6 +1,6 @@
 package com.mobileapp.model;
 
-
+import com.mobileapp.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.validation.constraints.NotBlank;
@@ -12,7 +12,6 @@ import jakarta.validation.constraints.NotNull;
 @NoArgsConstructor
 @Entity
 @Builder
-@ToString(exclude = {"ocene"})
 @Table(name = "korisnik")
 public class Korisnik {
     @Id

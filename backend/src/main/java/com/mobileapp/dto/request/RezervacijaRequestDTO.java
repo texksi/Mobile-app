@@ -1,5 +1,9 @@
 package com.mobileapp.dto.request;
 
+import com.mobileapp.model.enums.NacinPlacanja;
+import com.mobileapp.model.enums.StatusRezervacije;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 @Getter
@@ -9,9 +13,13 @@ import lombok.*;
 @Builder
 public class RezervacijaRequestDTO {
 
-    private String nacinPlacanja;
-    private String status;
+    @NotNull
+    private NacinPlacanja nacinPlacanja;
+    @NotNull
+    private StatusRezervacije status;
+    @Positive
     private double ukupanIznos;
+    @NotNull
     private Long korisnikId;
     
 }

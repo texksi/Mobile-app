@@ -2,6 +2,7 @@ package com.mobileapp.service;
 
 import com.mobileapp.dto.request.KartaRequestDTO;
 import com.mobileapp.dto.response.KartaResponseDTO;
+import com.mobileapp.exceptions.EntityNotFoundException;
 import com.mobileapp.mapper.KartaMapper;
 import com.mobileapp.model.Karta;
 import com.mobileapp.model.Putovanje;
@@ -9,7 +10,6 @@ import com.mobileapp.model.Rezervacija;
 import com.mobileapp.repository.KartaRepository;
 import com.mobileapp.repository.PutovanjeRepository;
 import com.mobileapp.repository.RezervacijaRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,6 @@ public class KartaService {
     private final KartaMapper kartaMapper;
     private final RezervacijaRepository rezervacijaRepository;
     private final PutovanjeRepository putovanjeRepository;
-
     private static final String KARTA_NOT_FOUND = "Karta nije pronadjena";
 
     public KartaResponseDTO getKartaById(Long id) {

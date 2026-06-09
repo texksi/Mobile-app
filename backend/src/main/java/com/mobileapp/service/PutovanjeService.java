@@ -2,12 +2,12 @@ package com.mobileapp.service;
 
 import com.mobileapp.dto.request.PutovanjeRequestDTO;
 import com.mobileapp.dto.response.PutovanjeResponseDTO;
+import com.mobileapp.exceptions.EntityNotFoundException;
 import com.mobileapp.mapper.PutovanjeMapper;
 import com.mobileapp.model.Kompanija;
 import com.mobileapp.model.Putovanje;
 import com.mobileapp.repository.KompanijaRepository;
 import com.mobileapp.repository.PutovanjeRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

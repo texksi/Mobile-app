@@ -2,12 +2,12 @@ package com.mobileapp.service;
 
 import com.mobileapp.dto.request.RezervacijaRequestDTO;
 import com.mobileapp.dto.response.RezervacijaResponseDTO;
+import com.mobileapp.exceptions.EntityNotFoundException;
 import com.mobileapp.mapper.RezervacijaMapper;
 import com.mobileapp.model.Korisnik;
 import com.mobileapp.model.Rezervacija;
 import com.mobileapp.repository.KorisnikRepository;
 import com.mobileapp.repository.RezervacijaRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

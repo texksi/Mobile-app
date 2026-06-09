@@ -48,15 +48,14 @@ public class PutovanjeService {
     }
 
 
-    public PutovanjeResponseDTO updatePutovanje(Long id, String polaziste, String odrediste, LocalDateTime vremePolaska, LocalDateTime vremeDolaska, double osnovnaCena) {
+    public PutovanjeResponseDTO updatePutovanje(Long id, PutovanjeRequestDTO requestDTO) {
         Putovanje savedPutovanje = putovanjeRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(PUTOVANJE_NOT_FOUND)
-        );
-        savedPutovanje.setPolaziste(polaziste);
-        savedPutovanje.setOdrediste(odrediste);
-        savedPutovanje.setVremePolaska(vremePolaska);
-        savedPutovanje.setVremeDolaska(vremeDolaska);
-        savedPutovanje.setOsnovnaCena(osnovnaCena);
+                () -> new EntityNotFoundException(PUTOVANJE_NOT_FOUND));
+        savedPutovanje.setPolaziste(requestDTO.getPolaziste());
+        savedPutovanje.setOdrediste(requestDTO.getOdrediste());
+        savedPutovanje.setVremePolaska(requestDTO.getVremePolaska());
+        savedPutovanje.setVremeDolaska(requestDTO.getVremeDolaska());
+        savedPutovanje.setOsnovnaCena(requestDTO.getOsnovnaCena());
         Putovanje putovanje = putovanjeRepository.save(savedPutovanje);
         return putovanjeMapper.toResponse(putovanje);
     }

@@ -52,11 +52,12 @@ public class KartaService {
     }
 
 
-    public KartaResponseDTO updateKarta(Long id, String brojSedista, String tip) {
+    public KartaResponseDTO updateKarta(Long id, KartaRequestDTO requestDTO) {
         Karta savedKarta = kartaRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(KARTA_NOT_FOUND));
-        savedKarta.setBrojSedista(brojSedista);
-        savedKarta.setTip(tip);
+        savedKarta.setBrojSedista(requestDTO.getBrojSedista());
+        savedKarta.setTip(requestDTO.getTip());
+        savedKarta.setOsnovnaCena(requestDTO.getOsnovnaCena());
         Karta karta = kartaRepository.save(savedKarta);
         return kartaMapper.toResponse(karta);
     }

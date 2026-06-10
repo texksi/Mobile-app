@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class GlobalExceptionHandler {
 
-     ErrorResponseDTO builderErrorResponse(String message, String errorCode,
+     private ErrorResponseDTO builderErrorResponse(String message, String errorCode,
                                                  int statusCode, LocalDateTime timestamp) {
         return ErrorResponseDTO.builder()
                 .message(message)
@@ -39,6 +39,14 @@ public class GlobalExceptionHandler {
                 HttpStatus.CONFLICT.value(), LocalDateTime.now());
         log.error("EntityAlreadyExistsException {}", ex, ex.getCause());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ErrorResponseDTO> handleInvalidCredentialsException(InvalidCredentialsException ex){
+        ErrorResponseDTO error = builderErrorResponse(ex.getMessage(), "ERR_INVALID_CREDENTIALS",
+                HttpStatus.UNAUTHORIZED.value(), LocalDateTime.now());
+        log.error("InvalidCredentialsException {}", ex, ex.getCause());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
     
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -33,7 +33,10 @@ export default function RegisterScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#03757f" }}>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "#03757f" }}
+      edges={["top"]}
+    >
       <View style={styles.containerParent}>
         <BusIcon
           size={150}

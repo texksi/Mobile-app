@@ -34,7 +34,10 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#03757f" }}>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "#03757f" }}
+      edges={["top"]}
+    >
       <View style={styles.container}>
         <View style={styles.container1}>
           <Text style={styles.title}>Dobrodošli</Text>
@@ -43,7 +46,7 @@ export default function LoginScreen() {
           </Text>
           <TicketIcon
             size={100}
-            style={{ position: "absolute", top: 40, right: 150 }}
+            style={{ position: "absolute", top: 40, right: 160 }}
           />
         </View>
         <View style={styles.container2}>
@@ -68,12 +71,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#03757f",
   },
   container1: {
-    marginLeft: 90,
-    flex: 0.3,
+    flex: 0.27,
     backgroundColor: "#03757f",
   },
   container2: {
-    flex: 0.7,
+    flex: 0.73,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     backgroundColor: "#f0f2f1",
@@ -84,12 +86,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#fff",
     letterSpacing: 2,
+    textAlign: "center",
   },
   link: { textAlign: "center", marginTop: 16, color: "#03757f" },
   paragraph: {
     fontSize: 15,
     color: "#fff",
-    marginLeft: 15,
+    textAlign: "center",
   },
   titleLogin: {
     marginTop: 40,

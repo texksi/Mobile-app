@@ -1,5 +1,5 @@
 import * as React from "react";
-import Svg, { Defs, G, Path } from "react-native-svg";
+import Svg, { G, Path } from "react-native-svg";
 
 interface TravelIconProps {
   size?: number;
@@ -14,7 +14,6 @@ const TravelIcon = ({ size = 200, style }: TravelIconProps) => (
     style={style}
   >
     <G id="SVGRepo_iconCarrier">
-      <Defs></Defs>
       <Path
         d="M84.544 90.259s9.223.376 12.278.723c7.874.893 26.769 4.239 32.221 9.754 3.723 3.767 4.649 9.933 4.791 14.094.708 20.682 2.527 57.67-.546 78.39-.883 5.956-3.221 12.621-13.864 14.225-2.037.308-10.407.656-12.411.79l-5.636.274Z"
         fill="#ffffff"

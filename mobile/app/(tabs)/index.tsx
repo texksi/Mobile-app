@@ -10,7 +10,7 @@ export default function HomeScreen() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        rowGap: 16,
+        gap: 16,
         backgroundColor: "#fff",
       }}
     >

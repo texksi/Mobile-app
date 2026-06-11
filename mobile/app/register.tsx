@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function RegisterScreen() {
   const router = useRouter();
@@ -32,40 +33,42 @@ export default function RegisterScreen() {
   };
 
   return (
-    <View style={styles.containerParent}>
-      <BusIcon
-        size={150}
-        style={{
-          position: "absolute",
-          top: 30,
-          right: -30,
-          zIndex: 10,
-          transform: [{ rotate: "0deg" }, { scaleX: -1 }],
-        }}
-      />
-      <BusIcon
-        size={150}
-        style={{
-          position: "absolute",
-          top: -20,
-          left: -30,
-          zIndex: 10,
-          transform: [{ rotate: "20deg" }],
-        }}
-      />
-      <View style={styles.container1}></View>
-      <View style={styles.container2}>
-        <TouchableOpacity onPress={() => router.push("/login")}>
-          <Text style={styles.arrow}>← Vrati se na prijavu</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>Registracija</Text>
-        <Text style={styles.paragraph}>Doborodošli na BusTicket</Text>
-        <AuthForm type="register" onSubmit={handleRegister} error={error} />
-        <TouchableOpacity onPress={() => router.push("/login")}>
-          <Text style={styles.link}>Već imaš nalog? Prijavi se</Text>
-        </TouchableOpacity>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#03757f" }}>
+      <View style={styles.containerParent}>
+        <BusIcon
+          size={150}
+          style={{
+            position: "absolute",
+            top: 30,
+            right: -30,
+            zIndex: 10,
+            transform: [{ rotate: "0deg" }, { scaleX: -1 }],
+          }}
+        />
+        <BusIcon
+          size={150}
+          style={{
+            position: "absolute",
+            top: -20,
+            left: -30,
+            zIndex: 10,
+            transform: [{ rotate: "20deg" }],
+          }}
+        />
+        <View style={styles.container1}></View>
+        <View style={styles.container2}>
+          <TouchableOpacity onPress={() => router.push("/login")}>
+            <Text style={styles.arrow}>← Vrati se na prijavu</Text>
+          </TouchableOpacity>
+          <Text style={styles.title}>Registracija</Text>
+          <Text style={styles.paragraph}>Doborodošli na BusTicket</Text>
+          <AuthForm type="register" onSubmit={handleRegister} error={error} />
+          <TouchableOpacity onPress={() => router.push("/login")}>
+            <Text style={styles.link}>Već imaš nalog? Prijavi se</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -75,6 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#03757f",
   },
   container1: {
+    marginTop: 10,
     flex: 0.2,
     justifyContent: "center",
     backgroundColor: "#03757f",

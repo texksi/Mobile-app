@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -33,29 +34,31 @@ export default function LoginScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.container1}>
-        <Text style={styles.title}>Dobrodošli</Text>
-        <Text style={styles.paragraph}>
-          Prijavite se da bi rezervisali karte
-        </Text>
-        <TicketIcon
-          size={100}
-          style={{ position: "absolute", top: 40, right: 150 }}
-        />
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#03757f" }}>
+      <View style={styles.container}>
+        <View style={styles.container1}>
+          <Text style={styles.title}>Dobrodošli</Text>
+          <Text style={styles.paragraph}>
+            Prijavite se da bi rezervisali karte
+          </Text>
+          <TicketIcon
+            size={100}
+            style={{ position: "absolute", top: 40, right: 150 }}
+          />
+        </View>
+        <View style={styles.container2}>
+          <Text style={styles.titleLogin}>Prijava</Text>
+          <AuthForm type="login" onSubmit={handleLogin} error={error} />
+          <TouchableOpacity onPress={() => router.push("/register")}>
+            <Text style={styles.link}>Nemaš nalog? Registruj se</Text>
+          </TouchableOpacity>
+          <TravelIcon
+            size={180}
+            style={{ position: "absolute", top: 420, right: 115 }}
+          />
+        </View>
       </View>
-      <View style={styles.container2}>
-        <Text style={styles.titleLogin}>Prijava</Text>
-        <AuthForm type="login" onSubmit={handleLogin} error={error} />
-        <TouchableOpacity onPress={() => router.push("/register")}>
-          <Text style={styles.link}>Nemaš nalog? Registruj se</Text>
-        </TouchableOpacity>
-        <TravelIcon
-          size={180}
-          style={{ position: "absolute", top: 420, right: 115 }}
-        />
-      </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

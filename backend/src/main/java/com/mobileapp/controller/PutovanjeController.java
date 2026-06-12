@@ -5,10 +5,13 @@ import com.mobileapp.dto.response.PutovanjeResponseDTO;
 import com.mobileapp.service.PutovanjeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -22,6 +25,14 @@ public class PutovanjeController {
         return ResponseEntity.ok(putovanjeService.getAllPutovanja());
     }
 
+    @GetMapping("/api/putovanja/pretraga")
+    public ResponseEntity<List<PutovanjeResponseDTO>> searchByRuta(
+            @RequestParam String polaziste,
+            @RequestParam String odrediste) {
+        return ResponseEntity.ok(putovanjeService.searchPutovanja(
+                polaziste, odrediste));
+    }
+    
     @GetMapping("/api/putovanja/{id}")
     public ResponseEntity<PutovanjeResponseDTO> getPutovanje(@PathVariable Long id) {
         return ResponseEntity.ok(putovanjeService.getPutovanjeById(id));
@@ -43,4 +54,6 @@ public class PutovanjeController {
         putovanjeService.deletePutovanje(id);
         return ResponseEntity.noContent().build();
     }
+
+    
 }

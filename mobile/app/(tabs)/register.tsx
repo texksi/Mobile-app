@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#03757f",
   },
   container1: {
-    marginTop: 10,
     flex: 0.2,
     justifyContent: "center",
     backgroundColor: "#03757f",

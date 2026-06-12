@@ -77,4 +77,12 @@ public class PutovanjeService {
         return putovanja.stream().map(putovanjeMapper::toResponse).toList();
     }
 
+    public List<PutovanjeResponseDTO> searchPutovanja(
+            String polaziste, String odrediste) {
+        List<Putovanje> putovanja = putovanjeRepository
+                .findByPolazisteAndOdrediste(
+                        polaziste, odrediste);
+        return putovanja.stream().map(putovanjeMapper::toResponse).toList();
+    }
+    
 }

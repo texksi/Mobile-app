@@ -43,14 +43,14 @@ export default function HomeScreen() {
         <TextInput
           style={styles.input}
           placeholder="Polazište"
-          placeholderTextColor="#999"
+          placeholderTextColor={"#6b7575"}
           value={polaziste}
           onChangeText={setPolaziste}
         />
         <TextInput
           style={styles.input}
           placeholder="Odredište"
-          placeholderTextColor="#999"
+          placeholderTextColor={"#6b7575"}
           value={odrediste}
           onChangeText={setOdrediste}
         />

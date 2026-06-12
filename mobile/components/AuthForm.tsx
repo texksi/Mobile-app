@@ -36,6 +36,7 @@ export default function AuthForm({ type, onSubmit, error }: AuthFormProps) {
           <TextInput
             style={styles.input}
             placeholder="Ime"
+            placeholderTextColor={"#6b7575"}
             value={ime}
             onChangeText={setIme}
           />
@@ -43,6 +44,7 @@ export default function AuthForm({ type, onSubmit, error }: AuthFormProps) {
           <TextInput
             style={styles.input}
             placeholder="Prezime"
+            placeholderTextColor={"#6b7575"}
             value={prezime}
             onChangeText={setPrezime}
           />
@@ -50,6 +52,7 @@ export default function AuthForm({ type, onSubmit, error }: AuthFormProps) {
           <TextInput
             style={styles.input}
             placeholder="Email"
+            placeholderTextColor={"#6b7575"}
             value={email}
             onChangeText={setEmail}
           />
@@ -59,6 +62,7 @@ export default function AuthForm({ type, onSubmit, error }: AuthFormProps) {
       <TextInput
         style={styles.input}
         placeholder="Username"
+        placeholderTextColor={"#6b7575"}
         value={username}
         onChangeText={setUsername}
       />
@@ -66,6 +70,7 @@ export default function AuthForm({ type, onSubmit, error }: AuthFormProps) {
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor={"#6b7575"}
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -88,7 +93,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 12,
     backgroundColor: "#ffffff",
-    color: "#8f9191",
+    color: "#383d3d",
     marginBottom: 13,
   },
   button: {

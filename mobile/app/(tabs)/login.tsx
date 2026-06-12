@@ -5,7 +5,13 @@ import { API_URL } from "@/constants/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function LoginScreen() {
@@ -46,10 +52,10 @@ export default function LoginScreen() {
           </Text>
           <TicketIcon
             size={100}
-            style={{ position: "absolute", top: 40, right: 160 }}
+            style={{ position: "absolute", top: 30, right: 160 }}
           />
         </View>
-        <View style={styles.container2}>
+        <ScrollView style={styles.container2}>
           <Text style={styles.titleLogin}>Prijava</Text>
           <AuthForm type="login" onSubmit={handleLogin} error={error} />
           <TouchableOpacity onPress={() => router.push("/register")}>
@@ -59,7 +65,7 @@ export default function LoginScreen() {
             size={180}
             style={{ position: "absolute", top: 420, right: 115 }}
           />
-        </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -71,17 +77,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#03757f",
   },
   container1: {
-    flex: 0.27,
+    flex: 0.3,
     backgroundColor: "#03757f",
+    marginBottom: 50,
   },
   container2: {
-    flex: 0.73,
+    flex: 0.7,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     backgroundColor: "#f0f2f1",
   },
   title: {
-    marginTop: 150,
+    marginTop: 130,
     fontSize: 43,
     fontWeight: "bold",
     color: "#fff",
@@ -93,6 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#fff",
     textAlign: "center",
+    marginTop: 10,
   },
   titleLogin: {
     marginTop: 40,

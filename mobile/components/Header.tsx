@@ -39,20 +39,6 @@ export default function Header({ activeTab }: Props) {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.tabs}>
-        {TABS.map((tab) => (
-          <TouchableOpacity
-            key={tab.route}
-            onPress={() => router.push(tab.route as any)}
-          >
-            <Text
-              style={[styles.tab, activeTab === tab.route && styles.activeTab]}
-            >
-              {tab.label}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
     </View>
   );
 }
@@ -65,6 +51,7 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   topRow: {
+    marginTop: 30,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",

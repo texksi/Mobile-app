@@ -34,6 +34,19 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="moje-rezervacije"
+        options={{
+          title: "Rezervacije",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="clipboard-list"
+              size={24}
+              color={color}
+            />
+          ),
+        }}
+      />
       <Tabs.Screen name="login" options={{ href: null, headerShown: false }} />
       <Tabs.Screen
         name="register"

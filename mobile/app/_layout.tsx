@@ -28,6 +28,11 @@ export default function RootLayout() {
         <Stack.Screen name="register" options={{ headerShown: false }} />
         <Stack.Screen name="kupi-kartu" options={{ headerShown: false }} />
         <Stack.Screen
+          name="moje-rezervacije"
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
           name="modal"
           options={{ presentation: "modal", title: "Modal" }}
         />

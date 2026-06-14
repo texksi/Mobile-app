@@ -26,7 +26,7 @@ public class Kompanija {
     @Column(name = "kontakt", nullable = false)
     @NotBlank
     private String kontakt;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "kompanija")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "kompanija",cascade = CascadeType.REMOVE)
     @Builder.Default
     private List<Putovanje> putovanja = new ArrayList<>();
 

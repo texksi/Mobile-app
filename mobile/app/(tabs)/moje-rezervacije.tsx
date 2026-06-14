@@ -1,7 +1,9 @@
 import { API_URL } from "@/constants/api";
+import { useAuth } from "@/hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   StyleSheet,
   Text,
@@ -15,10 +17,7 @@ export default function MojeRezervacije() {
   const [loading, setLoading] = useState(false);
   const [otvorene, setOtvorene] = useState<Set<number>>(new Set());
   const [karte, setKarte] = useState<{ [key: number]: any[] }>({});
-
-  useEffect(() => {
-    fetchKorisnikaIRezervacije();
-  }, []);
+  const { role, loadingRole } = useAuth();
 
   const fetchKorisnikaIRezervacije = async () => {
     setLoading(true);
@@ -55,6 +54,19 @@ export default function MojeRezervacije() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchKorisnikaIRezervacije();
+  }, []);
+
+  if (loadingRole) return <ActivityIndicator color="#03757f" />;
+
+  if (role !== "KORISNIK" && role !== "ADMIN")
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Nemate pristup ovoj stranici</Text>
+      </View>
+    );
 
   const getStatusBoja = (status: string) => {
     if (status === "PLACENA") return "#2e7d32";

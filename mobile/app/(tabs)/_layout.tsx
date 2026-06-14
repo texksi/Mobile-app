@@ -3,13 +3,16 @@ import React from "react";
 
 import { HapticTab } from "@/components/haptic-tab";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useAuth } from "@/hooks/useAuth";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { role } = useAuth();
 
   return (
     <Tabs
+      key={role}
       screenOptions={{
         tabBarActiveTintColor: "#03757f",
         headerShown: false,
@@ -38,6 +41,7 @@ export default function TabLayout() {
         name="moje-rezervacije"
         options={{
           title: "Rezervacije",
+          href: role === "GOST" ? null : undefined,
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="clipboard-list"
@@ -51,6 +55,16 @@ export default function TabLayout() {
       <Tabs.Screen
         name="register"
         options={{ href: null, headerShown: false }}
+      />
+      <Tabs.Screen
+        name="admin-kompanije"
+        options={{
+          title: "Kompanije - Admin",
+          href: role === "ADMIN" ? undefined : null,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="domain" size={24} color={color} />
+          ),
+        }}
       />
     </Tabs>
   );

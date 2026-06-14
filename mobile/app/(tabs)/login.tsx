@@ -2,6 +2,7 @@ import AuthForm from "@/components/AuthForm";
 import TicketIcon from "@/components/svgs/TicketIcon";
 import TravelIcon from "@/components/svgs/TravelIcon";
 import { API_URL } from "@/constants/api";
+import { authEmitter } from "@/hooks/authEvents";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -33,6 +34,7 @@ export default function LoginScreen() {
 
       const result = await response.json();
       await AsyncStorage.setItem("token", result.token);
+      authEmitter.emit("authChanged");
       router.replace("/");
     } catch (e) {
       setError("Greska pri povezivanju sa serverom");

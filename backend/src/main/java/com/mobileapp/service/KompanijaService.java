@@ -6,7 +6,10 @@ import com.mobileapp.exceptions.EntityAlreadyExistsException;
 import com.mobileapp.exceptions.EntityNotFoundException;
 import com.mobileapp.mapper.KompanijaMapper;
 import com.mobileapp.model.Kompanija;
+import com.mobileapp.model.Putovanje;
+import com.mobileapp.repository.KartaRepository;
 import com.mobileapp.repository.KompanijaRepository;
+import com.mobileapp.repository.PutovanjeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ public class KompanijaService {
 
     private final KompanijaRepository kompanijaRepository;
     private final KompanijaMapper kompanijaMapper;
+    private final PutovanjeRepository putovanjeRepository;
+    private final KartaRepository kartaRepository;
     private final String KOMPANIJA_NOT_FOUND = "Kompanije ne postoji u sistemu";
 
     public KompanijaResponseDTO getKompanijaById(Long id){
@@ -64,6 +69,12 @@ public class KompanijaService {
     public void deleteKompanija(Long id){
         if(!kompanijaRepository.existsById(id)){
             throw new EntityAlreadyExistsException(KOMPANIJA_NOT_FOUND);
+        }
+        List<Putovanje> putovanja = putovanjeRepository.findAllByKompanijaId(id);
+        for (Putovanje p : putovanja) {
+            if (!kartaRepository.findAllByPutovanjeId(p.getId()).isEmpty()) {
+                throw new RuntimeException("Ne mozete obrisati kompaniju koja ima aktivne karte");
+            }
         }
         kompanijaRepository.deleteById(id);
     }

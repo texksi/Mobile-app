@@ -1,5 +1,7 @@
 import { API_URL } from "@/constants/api";
+import { useAuth } from "@/hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   Dimensions,
@@ -17,6 +19,8 @@ export default function BuyTicketsScreen() {
   const [odrediste, setOdrediste] = useState("");
   const [loading, setLoading] = useState(false);
   const [putovanja, setPutovanja] = useState<any[]>([]);
+  const { role } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     fetchSvaPutovanja();
@@ -63,6 +67,13 @@ export default function BuyTicketsScreen() {
       console.error(e);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const rezervisi = (item: any) => {
+    if (role === "GOST") {
+      router.push("/login");
+      return;
     }
   };
 
@@ -122,7 +133,10 @@ export default function BuyTicketsScreen() {
                   {new Date(item.vremeDolaska).toLocaleString("sr-RS")}
                 </Text>
               </View>
-              <TouchableOpacity style={styles.rezervisiBtn}>
+              <TouchableOpacity
+                style={styles.rezervisiBtn}
+                onPress={() => rezervisi(item)}
+              >
                 <Text style={styles.rezervisiBtnText}>Rezerviši</Text>
               </TouchableOpacity>
             </View>

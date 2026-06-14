@@ -35,7 +35,7 @@ public class Karta {
     @JoinColumn(name = "rezervacija_id")
     private Rezervacija rezervacija;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "putovanje_id")
+    @JoinColumn(name = "putovanje_id", foreignKey = @ForeignKey(name = "fk_karta_putovanje"), nullable = true)
     private Putovanje putovanje;
 
 }

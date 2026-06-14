@@ -31,7 +31,7 @@ export default function AuthForm({ type, onSubmit, error }: AuthFormProps) {
   return (
     <View style={styles.container}>
       {type === "register" && (
-        <>
+        <View>
           <Text style={styles.label}>Ime</Text>
           <TextInput
             style={styles.input}
@@ -56,7 +56,7 @@ export default function AuthForm({ type, onSubmit, error }: AuthFormProps) {
             value={email}
             onChangeText={setEmail}
           />
-        </>
+        </View>
       )}
       <Text style={styles.label}>Korisničko ime</Text>
       <TextInput
@@ -88,7 +88,7 @@ export default function AuthForm({ type, onSubmit, error }: AuthFormProps) {
 }
 
 const styles = StyleSheet.create({
-  container: { gap: 3, padding: 20 },
+  container: { rowGap: 3, padding: 20 },
   input: {
     borderRadius: 20,
     padding: 12,

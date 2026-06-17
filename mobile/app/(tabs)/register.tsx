@@ -16,7 +16,10 @@ export default function RegisterScreen() {
     try {
       const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true",
+        },
         body: JSON.stringify(data),
       });
 
@@ -60,13 +63,13 @@ export default function RegisterScreen() {
             transform: [{ rotate: "20deg" }],
           }}
         />
-        <View style={styles.container1}></View>
+        <View style={styles.container1} />
         <View style={styles.container2}>
           <TouchableOpacity onPress={() => router.push("/login")}>
             <Text style={styles.arrow}>← Vrati se na prijavu</Text>
           </TouchableOpacity>
           <Text style={styles.title}>Registracija</Text>
-          <Text style={styles.paragraph}>Doborodošli na BusTicket</Text>
+          <Text style={styles.paragraph}>Dobrodošli na BusTicket</Text>
           <AuthForm type="register" onSubmit={handleRegister} error={error} />
           <TouchableOpacity onPress={() => router.push("/login")}>
             <Text style={styles.link}>Već imaš nalog? Prijavi se</Text>
@@ -84,7 +87,6 @@ const styles = StyleSheet.create({
   },
   container1: {
     flex: 0.2,
-    justifyContent: "center",
     backgroundColor: "#03757f",
   },
   container2: {
@@ -92,6 +94,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     backgroundColor: "#f0f2f1",
+    paddingBottom: 40,
   },
   title: {
     marginLeft: 20,
@@ -101,6 +104,7 @@ const styles = StyleSheet.create({
     color: "#03757f",
     letterSpacing: 3,
     marginBottom: 5,
+    marginTop: 10,
   },
   paragraph: {
     marginLeft: 20,

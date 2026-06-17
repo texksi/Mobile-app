@@ -24,14 +24,6 @@ export default function RootLayout() {
     <ThemeProvider value={DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="register" options={{ headerShown: false }} />
-        <Stack.Screen name="kupi-kartu" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="moje-rezervacije"
-          options={{ headerShown: false }}
-        />
-
         <Stack.Screen
           name="modal"
           options={{ presentation: "modal", title: "Modal" }}

@@ -8,10 +8,6 @@ export function useAuth() {
   const [role, setRole] = useState<Role>("GOST");
   const [loadingRole, setLoading] = useState(true);
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
   const checkAuth = async () => {
     try {
       const token = await AsyncStorage.getItem("token");
@@ -20,6 +16,7 @@ export function useAuth() {
         return;
       }
       const payload = JSON.parse(atob(token.split(".")[1]));
+      console.log("auth payload:", JSON.stringify(payload));
       setRole(payload.role);
     } catch {
       setRole("GOST");

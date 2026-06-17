@@ -1,7 +1,8 @@
 import { API_URL } from "@/constants/api";
 import { useAuth } from "@/hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect, useState } from "react";
+import { useFocusEffect } from "expo-router";
+import { useCallback, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -55,9 +56,11 @@ export default function MojeRezervacije() {
     }
   };
 
-  useEffect(() => {
-    fetchKorisnikaIRezervacije();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchKorisnikaIRezervacije();
+    }, []),
+  );
 
   if (loadingRole) return <ActivityIndicator color="#03757f" />;
 
@@ -107,7 +110,9 @@ export default function MojeRezervacije() {
         <Text style={styles.title}>Moje rezervacije</Text>
       </View>
       <View style={styles.listaContainer}>
-        {rezervacije.length === 0 ? (
+        {loading ? (
+          <ActivityIndicator color="#03757f" style={{ marginTop: 40 }} />
+        ) : rezervacije.length === 0 ? (
           <Text style={styles.prazno}>Nemate rezervacija</Text>
         ) : (
           <FlatList

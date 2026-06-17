@@ -28,6 +28,7 @@ export default function TabLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
         name="kupi-kartu"
         options={{
@@ -37,6 +38,17 @@ export default function TabLayout() {
           ),
         }}
       />
+
+      <Tabs.Screen
+        name="korpa"
+        options={{
+          title: "Korpa",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="cart" size={24} color={color} />
+          ),
+        }}
+      />
+
       <Tabs.Screen
         name="moje-rezervacije"
         options={{
@@ -51,11 +63,14 @@ export default function TabLayout() {
           ),
         }}
       />
+
       <Tabs.Screen name="login" options={{ href: null, headerShown: false }} />
+
       <Tabs.Screen
         name="register"
         options={{ href: null, headerShown: false }}
       />
+
       <Tabs.Screen
         name="admin-kompanije"
         options={{

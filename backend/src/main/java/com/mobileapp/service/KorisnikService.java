@@ -69,6 +69,7 @@ public class KorisnikService {
         savedKorisnik.setPrezime(dto.getPrezime());
         savedKorisnik.setEmail(dto.getEmail());
         savedKorisnik.setUsername(dto.getUsername());
+        savedKorisnik.setRole(dto.getRole());
         Korisnik updatedKorisnik = korisnikRepository.save(savedKorisnik);
         return korisnikMapper.toResponse(updatedKorisnik);
     }

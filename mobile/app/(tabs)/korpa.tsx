@@ -29,18 +29,40 @@ export default function KorpaScreen() {
 
   const getKljuc = async () => {
     const token = await AsyncStorage.getItem("token");
-    const payload = JSON.parse(atob(token!.split(".")[1]));
-    return `korpa_${payload.sub}`;
+
+    if (!token) {
+      return null;
+    }
+
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      return `korpa_${payload.sub}`;
+    } catch (error) {
+      console.error("Greška pri čitanju tokena:", error);
+      return null;
+    }
   };
 
   const ucitajKorpu = async () => {
     const kljuc = await getKljuc();
+
+    if (!kljuc) {
+      setKorpa([]);
+      return;
+    }
+
     const data = await AsyncStorage.getItem(kljuc);
     setKorpa(data ? JSON.parse(data) : []);
   };
 
   const ukloniStavku = async (index: number) => {
     const kljuc = await getKljuc();
+
+    if (!kljuc) {
+      Alert.alert("Greška", "Morate biti prijavljeni.");
+      return;
+    }
+
     const novaKorpa = korpa.filter((_, i) => i !== index);
     setKorpa(novaKorpa);
     await AsyncStorage.setItem(kljuc, JSON.stringify(novaKorpa));
@@ -58,7 +80,21 @@ export default function KorpaScreen() {
     setLoading(true);
     try {
       const token = await AsyncStorage.getItem("token");
-      const payload = JSON.parse(atob(token!.split(".")[1]));
+
+      if (!token) {
+        Alert.alert("Greška", "Morate biti prijavljeni da biste kupili kartu.");
+        return;
+      }
+
+      let payload;
+
+      try {
+        payload = JSON.parse(atob(token.split(".")[1]));
+      } catch (error) {
+        Alert.alert("Greška", "Token nije ispravan. Prijavite se ponovo.");
+        return;
+      }
+
       const username = payload.sub;
       const kljuc = `korpa_${username}`;
 

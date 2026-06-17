@@ -92,6 +92,20 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="admin-korisnici"
+        options={{
+          title: "Korisnici - Admin",
+          href: role === "ADMIN" ? undefined : null,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-group"
+              size={24}
+              color={color}
+            />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

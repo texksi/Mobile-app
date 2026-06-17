@@ -81,6 +81,17 @@ export default function TabLayout() {
           ),
         }}
       />
+
+      <Tabs.Screen
+        name="admin-putovanja"
+        options={{
+          title: "Putovanja - Admin",
+          href: role === "ADMIN" ? undefined : null,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="bus" size={24} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

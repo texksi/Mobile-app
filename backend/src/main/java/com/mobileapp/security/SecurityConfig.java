@@ -4,6 +4,7 @@ import com.mobileapp.service.MyUserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -36,6 +37,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/putovanja").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/kompanije").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/putovanja/pretraga").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

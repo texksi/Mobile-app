@@ -2,18 +2,19 @@ import { API_URL } from "@/constants/api";
 import { useAuth } from "@/hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import React, { useEffect, useState } from "react";
+import { useFocusEffect } from "expo-router";
+import React, { useCallback, useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    FlatList,
-    Modal,
-    Platform,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  Modal,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -69,11 +70,13 @@ export default function AdminPutovanja() {
 
   const { role, loadingRole } = useAuth();
 
-  useEffect(() => {
-    if (!loadingRole && role === "ADMIN") {
-      fetchPodaci();
-    }
-  }, [loadingRole, role]);
+  useFocusEffect(
+    useCallback(() => {
+      if (!loadingRole && role === "ADMIN") {
+        fetchPodaci();
+      }
+    }, [loadingRole, role]),
+  );
 
   const getToken = async () => {
     return await AsyncStorage.getItem("token");

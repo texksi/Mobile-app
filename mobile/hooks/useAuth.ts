@@ -16,7 +16,6 @@ export function useAuth() {
         return;
       }
       const payload = JSON.parse(atob(token.split(".")[1]));
-      console.log("auth payload:", JSON.stringify(payload));
       setRole(payload.role);
     } catch {
       setRole("GOST");

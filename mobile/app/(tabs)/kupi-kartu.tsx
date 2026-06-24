@@ -1,8 +1,8 @@
 import { API_URL } from "@/constants/api";
 import { useAuth } from "@/hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import { useCallback, useState } from "react";
 import {
   Dimensions,
   FlatList,
@@ -31,18 +31,13 @@ export default function BuyTicketsScreen() {
   const [selectedTip, setSelectedTip] = useState("standard");
   const { role } = useAuth();
   const router = useRouter();
-
-  useEffect(() => {
-    fetchSvaPutovanja();
-  }, []);
+  const params = useLocalSearchParams();
 
   const fetchSvaPutovanja = async () => {
     setLoading(true);
     try {
-      const token = await AsyncStorage.getItem("token");
       const response = await fetch(`${API_URL}/api/putovanja`, {
         headers: {
-          Authorization: `Bearer ${token}`,
           "ngrok-skip-browser-warning": "true",
         },
       });
@@ -56,15 +51,17 @@ export default function BuyTicketsScreen() {
   };
 
   const pretraziPutovanja = async () => {
+    if (polaziste.trim() === "" && odrediste.trim() === "") {
+      fetchSvaPutovanja();
+      return;
+    }
     setLoading(true);
     try {
-      const token = await AsyncStorage.getItem("token");
       const params = new URLSearchParams({ polaziste, odrediste });
       const response = await fetch(
         `${API_URL}/api/putovanja/pretraga?${params}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
             "ngrok-skip-browser-warning": "true",
           },
         },
@@ -77,6 +74,24 @@ export default function BuyTicketsScreen() {
       setLoading(false);
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      if (params.polaziste || params.odrediste) {
+        const pol = (params.polaziste as string) || "";
+        const odr = (params.odrediste as string) || "";
+        setPolaziste(pol);
+        setOdrediste(odr);
+        if (pol.trim() === "" && odr.trim() === "") {
+          fetchSvaPutovanja();
+        } else {
+          pretraziPutovanja();
+        }
+      } else {
+        fetchSvaPutovanja();
+      }
+    }, [params.polaziste, params.odrediste]),
+  );
 
   const rezervisi = (item: any) => {
     if (role === "GOST") {

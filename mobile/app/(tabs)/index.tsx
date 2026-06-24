@@ -1,7 +1,8 @@
 import Header from "@/components/Header";
+import { API_URL } from "@/constants/api";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useFocusEffect, useRouter } from "expo-router";
+import { useCallback, useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -11,18 +12,31 @@ import {
   View,
 } from "react-native";
 
-const mockKompanije = [
-  { id: 1, naziv: "BusExpress", opis: "Brzi i udobni autobusi" },
-  { id: 2, naziv: "TravelPlus", opis: "Povoljne cene, vrhunska usluga" },
-  { id: 3, naziv: "EuroRide", opis: "Međunarodne linije" },
-  { id: 4, naziv: "CityLine", opis: "Gradski i prigradski prevoz" },
-];
-
 export default function HomeScreen() {
   const router = useRouter();
   const [polaziste, setPolaziste] = useState("");
   const [odrediste, setOdrediste] = useState("");
+  const [kompanije, setKompanije] = useState<any[]>([]);
 
+  useFocusEffect(
+    useCallback(() => {
+      fetchKompanije();
+    }, []),
+  );
+
+  const fetchKompanije = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/kompanije`, {
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+      });
+      const data = await response.json();
+      setKompanije(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <ScrollView style={styles.container}>
       <Header activeTab="/" />
@@ -56,7 +70,12 @@ export default function HomeScreen() {
         />
         <TouchableOpacity
           style={styles.searchBtn}
-          onPress={() => router.push("/")}
+          onPress={() =>
+            router.push({
+              pathname: "/kupi-kartu",
+              params: { polaziste, odrediste },
+            })
+          }
         >
           <Text style={styles.searchBtnText}>Pretraži</Text>
         </TouchableOpacity>
@@ -66,7 +85,7 @@ export default function HomeScreen() {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Kompanije</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {mockKompanije.map((k) => (
+          {kompanije.map((k) => (
             <TouchableOpacity
               key={k.id}
               style={styles.card}
@@ -79,7 +98,7 @@ export default function HomeScreen() {
                 style={{ marginBottom: 8 }}
               />
               <Text style={styles.cardTitle}>{k.naziv}</Text>
-              <Text style={styles.cardOpis}>{k.opis}</Text>
+              <Text style={styles.cardOpis}>{k.kontakt}</Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
